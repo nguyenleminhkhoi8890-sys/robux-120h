@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mời Bot Discord Vào Server - Robux Pay Bot</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        discord: {
+                            purple: '#5865F2',
+                            green: '#57F287',
+                            yellow: '#FEE75C',
+                            fuchsia: '#EB459E',
+                            red: '#ED4245',
+                            dark: '#313338',
+                            darker: '#2B2D31',
+                            darkest: '#1E1F22'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-discord-darkest text-gray-100 min-h-screen flex flex-col justify-between selection:bg-discord-purple selection:text-white">
+
+    <!-- Header Navigation -->
+    <header class="bg-discord-darker border-b border-gray-800 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-discord-purple flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-discord-purple/30">
+                    🤖
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight text-white">Robux Pay Bot</h1>
+                    <span class="text-xs text-discord-green font-medium flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-discord-green animate-pulse"></span>
+                        Hoạt động 24/7
+                    </span>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <a href="#features" class="hidden md:inline-block text-sm text-gray-400 hover:text-white transition">Tính năng</a>
+                <a href="#commands" class="hidden md:inline-block text-sm text-gray-400 hover:text-white transition">Lệnh Bot</a>
+                <button onclick="scrollToInvite()" class="bg-discord-purple hover:bg-opacity-90 text-white text-sm font-semibold px-4 py-2 rounded-lg transition duration-200 shadow-md hover:shadow-discord-purple/20">
+                    <i class="fa-solid fa-plus-circle mr-1.5"></i> Mời Bot Ngay
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section class="relative py-16 md:py-24 overflow-hidden bg-gradient-to-b from-discord-darker to-discord-darkest border-b border-gray-800">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-discord-purple/10 border border-discord-purple/30 text-discord-purple text-xs font-semibold mb-6">
+                    <i class="fa-solid fa-bolt"></i> Đồng bộ Slash Commands toàn cầu
+                </div>
+                
+                <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+                    Hệ Thống Quản Lý <span class="text-transparent bg-clip-text bg-gradient-to-r from-discord-purple via-purple-400 to-discord-green">Robux & Nạp Thẻ</span> Tự Động
+                </h2>
+                
+                <p class="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+                    Mời bot vào máy chủ của bạn để trải nghiệm tính năng rút Robux Pending 120h, nạp card quy đổi Xu, và thông báo giao dịch Discord chuyên nghiệp!
+                </p>
+
+                <!-- Client ID / Invite Generator Box -->
+                <div class="bg-discord-darker p-6 rounded-2xl border border-gray-700/60 shadow-2xl max-w-xl mx-auto text-left">
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                        1. Nhập Client ID Bot của bạn (Đã điền sẵn Bot ID của bạn):
+                    </label>
+                    <div class="flex flex-col sm:flex-row gap-3 mb-4">
+                        <div class="relative flex-1">
+                            <i class="fa-solid fa-robot absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                            <input type="text" id="clientIdInput" value="1548669048051466290" placeholder="Ví dụ: 1548669048051466290" 
+                                class="w-full pl-10 pr-4 py-2.5 bg-discord-darkest border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-discord-purple text-sm transition">
+                        </div>
+                        <button onclick="generateInviteLink()" class="bg-gray-700 hover:bg-gray-600 text-white font-medium px-4 py-2.5 rounded-lg text-sm transition shrink-0">
+                            Cập nhật Link
+                        </button>
+                    </div>
+
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                        2. Nhấp để mời Bot vào máy chủ:
+                    </label>
+                    <a id="inviteButton" href="https://discord.com/oauth2/authorize?client_id=1548669048051466290&scope=bot%20applications.commands&permissions=8" target="_blank" 
+                        class="flex items-center justify-center gap-3 w-full bg-discord-purple hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-xl text-base shadow-lg shadow-discord-purple/30 transition transform hover:-translate-y-0.5 active:translate-y-0">
+                        <i class="fa-brands fa-discord text-xl"></i>
+                        <span>THÊM BOT VÀO DISCORD</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+
+                    <div class="mt-4 pt-4 border-t border-gray-800 flex items-center justify-between text-xs text-gray-400">
+                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-discord-green"></i> Quyền: Administrator / Commands</span>
+                        <button onclick="copyInviteLink()" class="hover:text-white underline flex items-center gap-1">
+                            <i class="fa-solid fa-copy"></i> Sao chép URL
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-16 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h3 class="text-2xl font-bold text-white mb-2">Tính Năng Nổi Bật</h3>
+                <p class="text-gray-400 text-sm">Hệ thống hoàn chỉnh cho Admin và Thành viên Server</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Feature 1 -->
+                <div class="bg-discord-darker p-6 rounded-xl border border-gray-800 hover:border-discord-purple/40 transition">
+                    <div class="w-12 h-12 rounded-lg bg-discord-purple/20 text-discord-purple flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-coins"></i>
+                    </div>
+                    <h4 class="font-bold text-lg text-white mb-2">Rút Robux Pending 120h</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Chuyển đổi Xu sang Robux với trạng thái Pending 120 giờ chuẩn hệ thống Roblox, tự động hiển thị avatar và ID người chơi.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-discord-darker p-6 rounded-xl border border-gray-800 hover:border-discord-purple/40 transition">
+                    <div class="w-12 h-12 rounded-lg bg-discord-green/20 text-discord-green flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-credit-card"></i>
+                    </div>
+                    <h4 class="font-bold text-lg text-white mb-2">Nạp Thẻ & Duyệt Thủ Công</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Thành viên gửi đơn nạp thẻ cào (PIN/Seri). Đơn giữ ở trạng thái Chờ Duyệt cho đến khi Chủ Bot duyệt thẻ thành công.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-discord-darker p-6 rounded-xl border border-gray-800 hover:border-discord-purple/40 transition">
+                    <div class="w-12 h-12 rounded-lg bg-discord-yellow/20 text-discord-yellow flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h4 class="font-bold text-lg text-white mb-2">Slash Commands Modern</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Sử dụng cú pháp <code class="bg-discord-darkest px-1.5 py-0.5 rounded text-discord-yellow">/</code> trực quan, gợi ý thông số tự động, tương thích hoàn toàn trên Mobile & PC.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Commands List Section -->
+        <section id="commands" class="py-12 bg-discord-darker border-t border-gray-800">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6">
+                <div class="text-center mb-10">
+                    <h3 class="text-2xl font-bold text-white mb-2">Danh Sách Lệnh (Slash Commands)</h3>
+                    <p class="text-gray-400 text-sm">Gõ dấu <code class="bg-discord-darkest px-2 py-0.5 rounded text-discord-purple font-mono">/</code> trong kênh chat Discord để dùng</p>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="bg-discord-darkest p-4 rounded-xl border border-gray-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="font-mono bg-discord-purple/20 text-discord-purple px-2.5 py-1 rounded-lg text-sm font-semibold">/sodu</span>
+                            <span class="text-gray-200 text-sm font-medium">Xem số dư Xu & Robux quy đổi</span>
+                        </div>
+                        <span class="text-xs text-gray-500 bg-gray-800 px-2.5 py-1 rounded-full self-start sm:self-auto">Mọi người</span>
+                    </div>
+
+                    <div class="bg-discord-darkest p-4 rounded-xl border border-gray-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="font-mono bg-discord-purple/20 text-discord-purple px-2.5 py-1 rounded-lg text-sm font-semibold">/giverobux</span>
+                            <span class="text-gray-200 text-sm font-medium">Rút Robux Pending 120h cho tài khoản Roblox</span>
+                        </div>
+                        <span class="text-xs text-gray-500 bg-gray-800 px-2.5 py-1 rounded-full self-start sm:self-auto">Mọi người</span>
+                    </div>
+
+                    <div class="bg-discord-darkest p-4 rounded-xl border border-gray-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="font-mono bg-discord-purple/20 text-discord-purple px-2.5 py-1 rounded-lg text-sm font-semibold">/napthe</span>
+                            <span class="text-gray-200 text-sm font-medium">Gửi đơn nạp thẻ cào (Tự động gửi thông tin PIN/Seri)</span>
+                        </div>
+                        <span class="text-xs text-gray-500 bg-gray-800 px-2.5 py-1 rounded-full self-start sm:self-auto">Mọi người</span>
+                    </div>
+
+                    <div class="bg-discord-darkest p-4 rounded-xl border border-gray-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="font-mono bg-discord-green/20 text-discord-green px-2.5 py-1 rounded-lg text-sm font-semibold">/duyetthe</span>
+                            <span class="text-gray-200 text-sm font-medium">Duyệt đơn nạp thẻ cào (Xác nhận THẺ ĐÚNG / SAI)</span>
+                        </div>
+                        <span class="text-xs text-discord-green bg-discord-green/10 px-2.5 py-1 rounded-full self-start sm:self-auto">Chủ Bot</span>
+                    </div>
+
+                    <div class="bg-discord-darkest p-4 rounded-xl border border-gray-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="font-mono bg-discord-green/20 text-discord-green px-2.5 py-1 rounded-lg text-sm font-semibold">/setxu</span>
+                            <span class="text-gray-200 text-sm font-medium">Cấp hoặc điều chỉnh số dư Xu cho thành viên</span>
+                        </div>
+                        <span class="text-xs text-discord-green bg-discord-green/10 px-2.5 py-1 rounded-full self-start sm:self-auto">Chủ Bot</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-discord-green text-gray-900 font-semibold px-4 py-3 rounded-xl shadow-xl flex items-center gap-2 transform translate-y-20 opacity-0 transition duration-300 z-50">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toastMessage">Đã sao chép liên kết!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-discord-darkest border-t border-gray-800 py-6 text-center text-gray-500 text-xs">
+        <p>© 2026 Robux Pay Bot. Tất cả quyền được bảo lưu.</p>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        function generateInviteLink() {
+            const clientId = document.getElementById('clientIdInput').value.trim();
+            const inviteButton = document.getElementById('inviteButton');
+            
+            if (clientId && !isNaN(clientId)) {
+                const inviteUrl = `https://discord.com/oauth2/authorize?client_id=${clientId}&scope=bot%20applications.commands&permissions=8`;
+                inviteButton.href = inviteUrl;
+                showToast("✅ Đã cập nhật Link mời Bot với Client ID mới!");
+            } else if (clientId !== "") {
+                showToast("❌ Client ID chỉ bao gồm các chữ số!");
+            }
+        }
+
+        function copyInviteLink() {
+            const inviteButton = document.getElementById('inviteButton');
+            const tempInput = document.createElement('input');
+            tempInput.value = inviteButton.href;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            
+            showToast("📋 Đã sao chép Link mời Bot vào khay nhớ tạm!");
+        }
+
+        function scrollToInvite() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toastMessage.textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
